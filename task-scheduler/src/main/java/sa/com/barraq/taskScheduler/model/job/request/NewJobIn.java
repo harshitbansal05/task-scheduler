@@ -12,5 +12,5 @@ import sa.com.barraq.taskScheduler.model.job.InternalJob;
 @AllArgsConstructor
 public class NewJobIn {
     private InternalJob job;
-    private final One2OneChannel<Object> cancelCh = Channel.one2one(1);
+    private One2OneChannel<Object> cancelCh;
 }

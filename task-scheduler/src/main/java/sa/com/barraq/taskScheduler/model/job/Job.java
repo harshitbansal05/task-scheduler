@@ -1,5 +1,6 @@
 package sa.com.barraq.taskScheduler.model.job;
 
+import lombok.Builder;
 import org.jcsp.lang.AltingChannelInput;
 import org.jcsp.lang.Channel;
 import org.jcsp.lang.One2OneChannel;
@@ -20,6 +21,7 @@ import java.util.UUID;
 import static sa.com.barraq.taskScheduler.exceptions.TaskSchedulerErrors.ErrJobNotFound;
 import static sa.com.barraq.taskScheduler.exceptions.TaskSchedulerErrors.ErrJobRunNowFailed;
 
+@Builder
 public class Job implements IJob {
 
     private final UUID id;
@@ -97,7 +99,7 @@ public class Job implements IJob {
         ReceiverResponse response = new ReceiverResponse();
         try {
             ReceiverFactory.getReceiverWithTimeout(String.valueOf(resp.hashCode()),
-                    new AltingChannelInput[]{resp.in()}, response, 100).run();
+                    new AltingChannelInput[]{resp.in()}, response, 1000).run();
         } catch (ReceiverTimedOutException exception) {
             throw ErrJobRunNowFailed;
         }

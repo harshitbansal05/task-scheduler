@@ -36,6 +36,7 @@ public class InternalJob {
     private boolean singletonMode;
     private LimitMode singletonLimitMode;
     private int limitRunsTo;
+    private int runCount;
     private LocalDateTime startTime;
     private boolean startImmediately;
 
@@ -56,7 +57,7 @@ public class InternalJob {
 
     @Getter
     @AllArgsConstructor
-    static class Task {
+    public static class Task {
         Object function;
         List<Object> parameters;
     }
