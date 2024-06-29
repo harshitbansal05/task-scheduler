@@ -376,7 +376,13 @@ public class Scheduler implements IScheduler {
 
     @SneakyThrows
     private void selectStart() {
-        new Thread(executor::start).start();
+        new Thread(() -> {
+            try {
+                executor.start();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
         started = true;
         for (Map.Entry<UUID, InternalJob> j : jobs.entrySet()) {
             UUID id = j.getKey();
